@@ -4,5 +4,5 @@ stages:
   - deploy
 
 include:
-#  - '/packgages/frontend/.gitlab-ci.yml'
-  - '/packgages/backend/.gitlab-ci.yml'
+#  - '/packages/frontend/.gitlab-ci.yml'
+  - '/packages/backend/.gitlab-ci.yml'
