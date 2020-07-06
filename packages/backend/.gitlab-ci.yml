@@ -1,0 +1,62 @@
+
+'Backend dependencies':
+  image: node:12.18.2
+  stage: dependencies
+  artifacts:
+    paths:
+      - packages/backend/node_modules/
+  dependencies: []
+  script:
+    - cd packages/backend
+    - npm install
+#  only:
+#    changes:
+#      - packages/backend/**/*
+#      - .gitlab-ci.yml  
+
+'Backend build':
+  image: node:12.18.2
+  stage: build
+  artifacts:
+    paths:
+      - packages/backend/dist/
+  dependencies:
+    - 'Backend dependencies'
+    - 'Common build'
+  script:
+    - cd packages/backend
+    - npm run build
+#  only:
+#    changes:
+#      - packages/backend/**/*
+#      - .gitlab-ci.yml
+
+'Backend deploy production':
+  image: ruby:latest
+  stage: deploy
+  script:
+    - apt-get update -qy
+    - apt-get install rubygems ruby-dev -y
+    - gem install dpl
+    - cd packages/backend
+    - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
+  only:
+    refs: ['staging']
+#    changes:
+#      - packages/backend/**/*
+#      - .gitlab-ci.yml
+
+'Backend deploy staging':
+  image: ruby:latest
+  stage: deploy
+  script:
+    - apt-get update -qy
+    - apt-get install rubygems ruby-dev -y
+    - gem install dpl
+    - cd packages/backend
+    - dpl --provider=heroku --app=$HEROKU_APP_STAGING --api-key=$HEROKU_API_KEY
+  only:
+    refs: ['staging']
+#    changes:
+#      - packages/backend/**/*
+#      - .gitlab-ci.yml
