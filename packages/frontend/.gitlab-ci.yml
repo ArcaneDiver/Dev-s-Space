@@ -5,7 +5,9 @@
   artifacts:
     paths:
       - packages/frontend/node_modules/
-  dependencies: []
+  dependencies: [
+    "Common publishing"
+  ]
   script:
     - cd packages/frontend
     - npm install
@@ -22,7 +24,6 @@
       - packages/frontend/dist/
   dependencies:
     - 'Frontend dependencies'
-    - 'Common build'
   script:
     - cd packages/frontend
     - npm run build

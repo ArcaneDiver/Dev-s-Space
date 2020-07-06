@@ -1,6 +1,7 @@
 stages:
   - dependencies
   - core-build
+  - core-publishing
   - build
   - deploy
 

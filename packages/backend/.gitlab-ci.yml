@@ -5,7 +5,9 @@
   artifacts:
     paths:
       - packages/backend/node_modules/
-  dependencies: []
+  dependencies: [
+    "Common publishing"
+  ]
   script:
     - cd packages/backend
     - npm install
@@ -22,7 +24,6 @@
       - packages/backend/dist/
   dependencies:
     - 'Backend dependencies'
-    - 'Common build'
   script:
     - cd packages/backend
     - npm run build
