@@ -29,3 +29,12 @@
 #    changes:
 #      - packages/common/**/*
 #      - .gitlab-ci.yml
+
+'Common publishing': 
+  image: node:12.18.2
+  stage: core-build
+  dependencies:
+    - 'Common build'
+  script:
+    - cd packages/common
+    - npm publish
