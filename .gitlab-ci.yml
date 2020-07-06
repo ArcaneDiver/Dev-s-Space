@@ -7,4 +7,3 @@ stages:
 include:
   - '/packages/frontend/.gitlab-ci.yml'
   - '/packages/backend/.gitlab-ci.yml'
-  - '/packages/common/.gitlab-ci.yml'
