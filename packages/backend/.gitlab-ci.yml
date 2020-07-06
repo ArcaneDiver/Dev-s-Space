@@ -2,7 +2,7 @@
   image: node:12.18.2
   stage: dependencies
   artifacts:
-    path:
+    paths:
       - packages/backend/node_modules/
   dependencies: []
   script:
