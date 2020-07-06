@@ -39,5 +39,5 @@
     - cd packages/common
     - npm config set @devs_space/common https://gitlab.com/api/v4/packages/npm/
     - npm config set '//gitlab.com/api/v4/packages/npm/:_authToken' "${NPM_TOKEN}"
-    - npm config set '//gitlab.com/api/v4/projects/Dev-s-Space/packages/npm/:_authToken' "${NPM_TOKEN}"
+    - npm config set '//gitlab.com/api/v4/projects/19750243/packages/npm/:_authToken' "${NPM_TOKEN}"
     - npm publish

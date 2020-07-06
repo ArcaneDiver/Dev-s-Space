@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
 
   "publishConfig": {
-    "@devs_space/common":"https://gitlab.com/api/v4/projects/Dev-s-Space/packages/npm/"
+    "@devs_space/common":"https://gitlab.com/api/v4/projects/19750243/packages/npm/"
   },
 
   "devDependencies": {
