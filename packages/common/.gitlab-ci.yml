@@ -32,7 +32,7 @@
 
 'Common publishing': 
   image: node:12.18.2
-  stage: core-build
+  stage: core-publishing
   dependencies:
     - 'Common build'
   script:
