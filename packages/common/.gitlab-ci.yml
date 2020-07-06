@@ -1,0 +1,32 @@
+
+
+'Common dependencies':
+  image: node:12.18.2
+  stage: dependencies
+  artifacts:
+    paths:
+      - packages/common/node_modules/
+  dependencies: []
+  script:
+    - cd packages/common
+    - npm install
+#  only:
+#    changes:
+#      - packages/common/**/*
+#      - .gitlab-ci.yml
+
+'Common build':
+  image: node:12.18.2
+  stage: core-build
+  artifacts:
+    paths:
+      - packages/common/dist/
+  dependencies:
+    - 'Common dependencies'
+  script:
+    - cd packages/common
+    - npm run build
+#  only:
+#    changes:
+#      - packages/common/**/*
+#      - .gitlab-ci.yml
