@@ -5,5 +5,8 @@ stages:
 
 
 include:
+  - '/packages/common/.gitlab-ci.yml'
+
+include:
   - '/packages/frontend/.gitlab-ci.yml'
   - '/packages/backend/.gitlab-ci.yml'

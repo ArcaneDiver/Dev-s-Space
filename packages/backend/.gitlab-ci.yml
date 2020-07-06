@@ -1,6 +1,4 @@
-include:
-  - '/packages/common/.gitlab-ci.yml'
-  
+
 'Backend dependencies':
   image: node:12.18.2
   stage: dependencies
