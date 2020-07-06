@@ -11,7 +11,7 @@
   only:
     changes:
       - packages/backend/**/*
-      - .gitlab-ci.yml
+      - .gitlab-ci.yml  
 
 'Backend build':
   image: node:12.18.2
@@ -39,7 +39,7 @@
     - cd packages/backend
     - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
   only:
-    - staging
+    refs: ['staging']
     changes:
       - packages/backend/**/*
       - .gitlab-ci.yml
@@ -54,7 +54,7 @@
     - cd packages/backend
     - dpl --provider=heroku --app=$HEROKU_APP_STAGING --api-key=$HEROKU_API_KEY
   only:
-    - staging
+    refs: ['staging']
     changes:
       - packages/backend/**/*
       - .gitlab-ci.yml
