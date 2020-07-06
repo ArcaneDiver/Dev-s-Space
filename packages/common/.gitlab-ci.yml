@@ -1,7 +1,7 @@
 
 'Common dependencies':
   image: node:12.18.2
-  stage: dependencies
+  stage: core-dependencies
   artifacts:
     paths:
       - packages/common/node_modules/
