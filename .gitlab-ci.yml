@@ -9,5 +9,5 @@ stages:
 
 include:
   - '/packages/common/.gitlab-ci.yml'
-  - '/packages/frontend/.gitlab-ci.yml'
+#  - '/packages/frontend/.gitlab-ci.yml'
   - '/packages/backend/.gitlab-ci.yml'

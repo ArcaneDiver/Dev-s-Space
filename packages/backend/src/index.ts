@@ -1,3 +1,11 @@
-import { hello } from "@Devs_Space/common"
+import "./lib/env"
 
-hello()
+import app from "./app"
+
+const PORT = process.env.PORT || 8000;
+
+
+
+app.listen(process.env.PORT, () => {
+        console.log(`Server running at ${PORT} port`);
+})
