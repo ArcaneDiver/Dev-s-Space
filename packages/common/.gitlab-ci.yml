@@ -37,4 +37,4 @@
     - 'Common build'
   script:
     - cd packages/common
-    - npm publish
+    - npm publish --loglevel verbose
