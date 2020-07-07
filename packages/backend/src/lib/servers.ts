@@ -2,11 +2,11 @@
 import { SERVERS_PATH } from "./env"
 
 
-export default class Servers {
+export class Servers {
         
         private static INSTANCE: Servers;
         
-        public static PATH: string = SERVERS_PATH
+        public static readonly PATH: string = SERVERS_PATH
 
         private constructor() {
                 
