@@ -1,6 +1,6 @@
 {
   "name": "@Devs_Space/backend",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -27,6 +27,7 @@
     "helmet": "^3.23.3",
     "morgan": "^1.10.0",
     "typeorm": "^0.2.25",
-    "yaml": "^1.10.0"
+    "yaml": "^1.10.0",
+    "@ArcaneDiver/common": "lastest"
   }
 }
