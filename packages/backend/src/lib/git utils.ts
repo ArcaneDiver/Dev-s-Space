@@ -1,11 +1,11 @@
 import { spawn } from "child_process"
 
 import { processToGenerator } from "./generators"
+import { Servers } from './servers';
 
-import { SERVERS_PATH } from "./env";
 
-export const clone = (url: string) => {
-        const process = spawn("git", ["clone", url, SERVERS_PATH]);
+export const clone = (url: string, name: string) => {
+        const process = spawn("git", ["clone", url, Servers.resolveServerPath(name)]);
 
         return processToGenerator(process);
 }

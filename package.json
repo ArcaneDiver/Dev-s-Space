@@ -10,7 +10,7 @@
   "scripts": {
     "frontend": "yarn workspace @Devs_Space/frontend",
     "backend": "yarn workspace @Devs_Space/backend",
-    "common": "yarn workspace @Devs_Space/common"
+    "common": "yarn workspace @ArcaneDiver/common"
   },
 
   "engines": {

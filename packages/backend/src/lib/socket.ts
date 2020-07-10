@@ -1,5 +1,6 @@
 import * as SocketIo from "socket.io"
 
+import { IStd } from "@ArcaneDiver/common"
 
 export class Socket {
         private static INSTANCE: Socket;
@@ -22,5 +23,13 @@ export class Socket {
 
         public get socket() {
                 return this._socket;
+        }
+
+        public async sendStdOutWithSocket(generator: AsyncGenerator<IStd>, repoName: string) {
+                console.log("Streaming trough the socket")
+                for await (const std of generator) {
+                        console.log(std);
+                        this._socket.emit(`${repoName}/stdout`, std);
+                }
         }
 }

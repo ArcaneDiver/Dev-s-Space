@@ -1,9 +1,5 @@
-import { Controllers } from '../types';
+import * as servers from "./servers"
 
-
-const Controllers: Controllers = {
-
-};
-
-
-export default Controllers;
+export default {
+        servers
+}
