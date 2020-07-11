@@ -12,15 +12,15 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "./scripts/common_version_update"
+      "pre-push": "cross-env ./scripts/common_version_update"
     }
   },
-
   "engines": {
     "node": "12.18.2",
     "npm": "6.14.5"
   },
   "devDependencies": {
+    "cross-env": "^7.0.2",
     "husky": "^4.2.5"
   }
 }
