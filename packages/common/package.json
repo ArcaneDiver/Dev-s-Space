@@ -8,12 +8,6 @@
   "publishConfig": {
     "@ArcaneDiver:registry":"https://gitlab.com/api/v4/projects/19750243/packages/npm/"
   },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm version patch"
-    }
-  },
-
   "devDependencies": {
     "typescript": "^3.9.6"
   },

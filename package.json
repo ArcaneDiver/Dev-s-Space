@@ -1,8 +1,6 @@
 {
   "name": "Devs_Space",
-  
   "version": "1.0.0",
-  
   "private": true,
   "workspaces": [
     "packages/*"
@@ -12,9 +10,17 @@
     "backend": "yarn workspace @Devs_Space/backend",
     "common": "yarn workspace @ArcaneDiver/common"
   },
+  "husky": {
+    "hooks": {
+      "pre-push": "./scripts/common_version_update"
+    }
+  },
 
   "engines": {
     "node": "12.18.2",
     "npm": "6.14.5"
+  },
+  "devDependencies": {
+    "husky": "^4.2.5"
   }
 }
