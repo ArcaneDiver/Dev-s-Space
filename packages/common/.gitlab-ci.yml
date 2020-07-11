@@ -37,11 +37,10 @@
     - 'Common build'
   script:
     - cd packages/common
-    - echo "
-      @ArcaneDiver:registry=https://gitlab.com/api/v4/packages/npm/\n
-
-      //gitlab.com/api/v4/packages/npm/:_authToken=${NPM_TOKEN}\n
-      //gitlab.com/api/v4/projects/19750243/packages/npm/:_authToken=${NPM_TOKEN}\n
-      " >> .npmrc
+    - echo -e \
+      "@ArcaneDiver:registry=https://gitlab.com/api/v4/packages/npm/\n" \
+      "//gitlab.com/api/v4/packages/npm/:_authToken=${NPM_TOKEN}\n" \
+      "//gitlab.com/api/v4/projects/19750243/packages/npm/:_authToken=${NPM_TOKEN}\n" \
+      >> .npmrc
     - cat .npmrc
     - npm publish --loglevel verbose

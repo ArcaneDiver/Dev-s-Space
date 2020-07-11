@@ -1,6 +1,8 @@
 <template>
 	<div class="box">
-		{{text}}
+		<div>
+			{{text}}
+		</div>
 	</div>
 </template>
 
@@ -26,5 +28,14 @@ export default Vue.extend({
 
 	background-color: black;
 	color: white;
+
+
+
+	& > div {
+		overflow-x: scroll;
+		width: 100%;
+		height: 100%;
+		word-break: keep-all;
+	}
 }
 </style>

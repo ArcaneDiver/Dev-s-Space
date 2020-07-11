@@ -32,6 +32,8 @@
     "yaml": "^1.10.0"
   },
   "nodemonConfig": {
-    "ignore": ["servers/*"]
-}
+    "ignore": [
+      "servers/*"
+    ]
+  }
 }
