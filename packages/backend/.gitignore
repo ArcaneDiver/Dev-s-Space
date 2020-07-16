@@ -1,9 +1,7 @@
 /node_modules
+/servers
 /dist
 
 tsconfig.tsbuildinfo
 
 .env
-
-
-/servers

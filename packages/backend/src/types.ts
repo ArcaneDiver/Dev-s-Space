@@ -6,6 +6,11 @@ export interface Controllers {
 
 export type Controller = (req: Request, res: Response, next: NextFunction) => void;
 
+export interface IServer {
+	name: string;
+	path: string;
+	entryPath?: string;
+}
 
 export type ServerConfigs = {
         name: string;

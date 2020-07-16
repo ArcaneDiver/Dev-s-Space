@@ -10,13 +10,9 @@ import { clone } from "./git utils"
 import { Socket } from './socket'
 import { handleErrorFromGenerator } from "./generators"
 import { serverConfigSchema } from './schemas';
-import { ServerConfigs } from "../types"
+import { ServerConfigs, IServer } from "../types"
 
-export interface IServer {
-	name: string;
-	path: string;
-	entryPath?: string;
-}
+
 
 export class Servers {
 
