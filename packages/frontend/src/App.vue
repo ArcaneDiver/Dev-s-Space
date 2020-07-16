@@ -1,6 +1,6 @@
 <template>
 	<div id="app">
-		<el-row v-if="servers.length" class="h-100">
+		<el-row v-if="servers" class="h-100">
 			<el-col class="h-100" :span="3">
 				<SideBar
 					:servers="servers"
@@ -37,7 +37,7 @@ export default Vue.extend({
 	},
 	data() {
 		return {
-			servers: [],
+			servers: null,
 			isDialogOpened: true
 		};
 	},
@@ -64,7 +64,7 @@ export default Vue.extend({
 		loaded(): boolean {
 			return !!this.servers;
 		},
-		
+
 	}
 });
 </script>

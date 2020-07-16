@@ -3,9 +3,9 @@
 		<el-row class="h-100 dialog-body" type="flex" align="center">
 			<el-col class="h-100" :span="7">
 				<el-steps class="h-100" direction="vertical" :active="step">
-					<el-step title="Info" icon="el-icon-edit" ></el-step>
-					<el-step title="Cloning" icon="el-icon-download" ></el-step>
-					<el-step title="Enqueue" icon="el-icon-cpu" ></el-step>
+					<el-step title="Info" icon="el-icon-edit"></el-step>
+					<el-step title="Cloning" icon="el-icon-download"></el-step>
+					<el-step title="Enqueue" icon="el-icon-cpu"></el-step>
 				</el-steps>
 			</el-col>
 			<el-col :span="17">
@@ -23,15 +23,16 @@
 						></el-input>
 					</el-form-item>
 				</el-form>
-				<StdBox
-					v-if="step === 1"
-					:text="stdText"
-				/>
+				<StdBox v-if="step === 1" :text="stdText" />
 			</el-col>
 		</el-row>
 		<span slot="footer" class="dialog-footer">
 			<el-button @click="handleClose">Cancel</el-button>
-			<el-button type="primary" @click="handleConfirm" :disabled="canCompleteStep0">
+			<el-button
+				type="primary"
+				@click="handleConfirm"
+				:disabled="canCompleteJob"
+			>
 				Confirm
 			</el-button>
 		</span>
@@ -41,12 +42,11 @@
 <script lang="ts">
 import Vue from "vue";
 import axios from "axios";
-import { IStd } from "@ArcaneDiver/common";
+import { IStd, IStatus } from "@ArcaneDiver/common";
 
 import { API_URL } from "../config/api";
 
-import StdBox from "@/components/StdBox.vue"
-
+import StdBox from "@/components/StdBox.vue";
 
 interface AddNewServerDialogData {
 	form: {
@@ -54,9 +54,10 @@ interface AddNewServerDialogData {
 		gitUrl: string;
 	};
 	step: 0 | 1 | 2;
+	jobStatus: "in progress" | "done" | "error";
 }
 
-export default Vue.extend<AddNewServerDialogData, any, any, any>({
+export default Vue.extend({
 	components: {
 		StdBox
 	},
@@ -73,13 +74,23 @@ export default Vue.extend<AddNewServerDialogData, any, any, any>({
 				gitUrl: ""
 			},
 			step: 0,
-			stdText: ""
+			stdText: "",
+			jobStatus: "in progress",
 		};
 	},
 	computed: {
-		canCompleteStep0() {
-			return !(this.form.name !== "" && this.form.gitUrl !== "")
-		},
+		canCompleteJob() {
+			return this.step === 0
+			?
+				this.canCompleteStep0()
+			:
+				this.step === 1
+				?
+					this.canCompleteStep1()
+				:
+					this.canCompleteStep2()
+		}
+
 	},
 	methods: {
 		handleClose() {
@@ -89,31 +100,63 @@ export default Vue.extend<AddNewServerDialogData, any, any, any>({
 			switch (this.step) {
 				case 0: {
 					this.handleStep0();
-				};
+				}
 				case 1: {
 					this.handleStep1();
-				};
+				}
 				case 2: {
 					this.handleStep2();
-				};
-			};
+				}
+			}
 		},
 		async handleStep0() {
 			await axios.post(`${API_URL}/servers`, {
 				...this.form
 			});
-
+			
 			this.$socket.$subscribe(`${this.form.name}/stdout`, (payload: IStd) => {
 				this.stdText = payload.message;
 			});
-
-			this.step ++;
+			this.$socket.$subscribe(`${this.form.name}/done`, () => {
+				this.handleStep1();
+			});
+			this.$socket.$subscribe(`${this.form.name}/error`, (payload: IStd) => {
+				this.handleError(payload);
+			});
+			
+			this.step++;
 		},
 		handleStep1() {
-			this.$socket.$unsubscribe(`${this.form.name}/stdout`);
+			this.$socket.$unsubscribe(`${this.form.name}/status`);
+			this.$socket.$unsubscribe(`${this.form.name}/done`);
+			this.$socket.$unsubscribe(`${this.form.name}/error`);
+
+			this.$socket.$subscribe(`${this.form.name}/status`, (payload: IStatus) => {
+				this.stdText = payload.message;
+			});
+			this.$socket.$subscribe(`${this.form.name}/done`, () => {
+				this.handleStep1();
+			});
+			this.$socket.$subscribe(`${this.form.name}/error`, (payload: IStatus) => {
+				this.handleError(payload);
+			});
+
+			this.step++;
 		},
 		handleStep2() {
-			// succhiamelo eslint
+			// E mo cosa fai eslint?
+		},
+		handleError(payload) {
+			console.log(payload);
+		},
+		canCompleteStep0() {
+			return !(this.form.name !== "" && this.form.gitUrl !== "");
+		},
+		canCompleteStep1() {
+			return this.jobStatus === "done";
+		},
+		canCompleteStep2() {
+			return this.jobStatus === "done";
 		}
 	}
 });

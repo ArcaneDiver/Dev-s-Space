@@ -1,6 +1,5 @@
-export type StdType = ("stderr" | "stdout");
+import { IMessage, messgeType } from "./socket"
 
-export interface IStd {
-        type: StdType,
-        message: string
-}
+export type StdType = messgeType;
+
+export type IStd = IMessage;
